@@ -1,0 +1,10 @@
+{
+  "name": "serenade-me",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "alexa-sdk": "^1.0.25",
+    "xml2js": "^0.4.19",
+    "request": "^2.88.0"
+  }
+}

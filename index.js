@@ -5,6 +5,7 @@
 const Alexa = require("alexa-sdk");
 const request = require("request");
 const parseString = require("xml2js").parseString;
+const { filter: peepeeFilter } = require("./lib/profanity");
 
 const APP_ID = process.env.APP_ID;
 const SKILL_NAME = "SerenadeMe";
@@ -52,7 +53,11 @@ const handleLyricLookup = function (artist, song, context) {
                     .replace(/\.[a-zA-Z]/g, (x) => x[0] + " " + x[1])
                     .replace(/\[[\s\S]*?\]/g, "")
                     .replace(/\'\'\'[\s\S]*?\'\'\'/g, "")
-                    .replace(/CHORUS|VERSE/g, "");
+                    .replace(/CHORUS|VERSE/g, "")
+                    .replace(peepeeFilter, "censored");
+
+                console.log("Original Lyrics: ", lyrics);
+                console.log("Filtered Lyrics: ", strippedLyrics);
                 context.response.cardRenderer(SKILL_NAME, info + lyrics);
                 context.response.speak(info + strippedLyrics);
                 context.emit(":responseReady");
